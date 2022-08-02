@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@mui/material';
-import User from './components/User';
+import RankingsTable from './components/RankingsTable';
 import { db } from './firebase.js';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp } from 'firebase/firestore';
 import './App.css';
@@ -52,10 +52,10 @@ function App() {
           onChange={e => setInput({ ...fields, [e.target.name]: e.target.value })} />
         <Button variant="contained" color="primary" onClick={addUser}>Add User</Button>
       </form>
-      <ul>
-        {users.sort((a, b) => (b.item.wins / (b.item.wins + b.item.losses)) - (a.item.wins / (a.item.wins + a.item.losses)))
-        .map(item => <User key={item.id} arr={item} />)}
-      </ul>
+      <RankingsTable 
+        headers={[{dateField: 'name', text: 'Name'}, 'Wins', 'Losses', 'Total Matches', 'Win Rate']}
+        data={users.map(user => ({...user, name: user.item.name, wins: user.item.wins, losses: user.item.losses, total: user.item.wins + user.item.losses, win_rate: (user.item.wins + user.item.losses) === 0 ? 0 : (user.item.wins / (user.item.wins + user.item.losses) * 100).toFixed(2)}))}
+      />
     </div>
   );
 }
