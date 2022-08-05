@@ -28,7 +28,7 @@ const RankingsTable = (props) => {
                 }
                 return true;
             }
-    },
+        },
         {dataField: 'total', text: 'Total Matches', sort: true, editable: false},
         {dataField: 'win_rate', text: 'Win Rate', sort: true, editable: false, sortFunc: (a, b, order, dataField) => {
             if (order === 'asc') {
@@ -36,7 +36,8 @@ const RankingsTable = (props) => {
             }
             return parseFloat(a) - parseFloat(b); // desc
           }
-        }
+        },
+        {dataField: 'delete', text: 'Delete', hidden: props.showDelete, editable: false}
     ];
 
     const defaultSorted = [{
