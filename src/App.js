@@ -57,13 +57,14 @@ function App() {
   return (
     <div className="App">
       <h2>Wrestling Rankings</h2>
+      <br />
       <RankingsTable
         headers={[{ dateField: 'name', text: 'Name' }, 'Wins', 'Losses', 'Total Matches', 'Win Rate']}
         data={users.map(user => ({ ...user, name: user.item.name, wins: user.item.wins, losses: user.item.losses, total: user.item.wins + user.item.losses, win_rate: (user.item.wins + user.item.losses) === 0 ? 0 : (user.item.wins / (user.item.wins + user.item.losses) * 100).toFixed(2), delete: <DeleteIcon fontSize="small" style={{ opacity: 0.7 }} onClick={() => { deleteDoc(doc(db, 'users', user.id)) }} /> }))}
         showDelete={showDelete}
       />
-      <Button color="secondary" onClick={showAddUserForm}>Add User</Button>
-      <Button color="warning" onClick={() => setShowDelete(!showDelete)}>{showDelete ? 'Show' : 'Hide'} Delete</Button>
+      <Button color="secondary" variant="contained" onClick={showAddUserForm}>Add User</Button>
+      <Button color="warning" variant="contained" onClick={() => setShowDelete(!showDelete)}>{showDelete ? 'Show' : 'Hide'} Delete</Button>
       <div className="add-user" style={{display: 'none'}}>
         <form>
           <TextField id="outlined-basic1" label="Name" name="name" variant="outlined" style={{ margin: "0px 5px" }} size="small" value={fields.name}

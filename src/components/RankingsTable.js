@@ -6,8 +6,8 @@ import { doc, updateDoc, serverTimestamp } from 'firebase/firestore';
 const RankingsTable = (props) => {
 
     const columns = [
-        {dataField: 'name', text: 'Name', sort: true, editable: false},
-        {dataField: 'wins', text: 'Wins', sort: true,
+        {dataField: 'name', text: 'Name', sort: true, editable: false, headerStyle: {color: 'white'}},
+        {dataField: 'wins', text: 'Wins', sort: true, headerStyle: {color: 'white'},
             validator: (newValue, row, column) => {
                 if (isNaN(newValue)) {
                 return {
@@ -18,7 +18,7 @@ const RankingsTable = (props) => {
                 return true;
             }
         },
-        {dataField: 'losses', text: 'Losses', sort: true,
+        {dataField: 'losses', text: 'Losses', sort: true, headerStyle: {color: 'white'},
             validator: (newValue, row, column) => {
                 if (isNaN(newValue)) {
                 return {
@@ -29,15 +29,15 @@ const RankingsTable = (props) => {
                 return true;
             }
         },
-        {dataField: 'total', text: 'Total Matches', sort: true, editable: false},
-        {dataField: 'win_rate', text: 'Win Rate', sort: true, editable: false, sortFunc: (a, b, order, dataField) => {
+        {dataField: 'total', text: 'Total Matches', sort: true, editable: false, headerStyle: {color: 'white'},},
+        {dataField: 'win_rate', text: 'Win Rate', sort: true, editable: false, headerStyle: {color: 'white'}, sortFunc: (a, b, order, dataField) => {
             if (order === 'asc') {
               return parseFloat(b) - parseFloat(a);
             }
             return parseFloat(a) - parseFloat(b); // desc
           }
         },
-        {dataField: 'delete', text: 'Delete', hidden: props.showDelete, editable: false}
+        {dataField: 'delete', text: 'Delete', hidden: props.showDelete, editable: false, headerStyle: {color: 'white'}}
     ];
 
     const defaultSorted = [{

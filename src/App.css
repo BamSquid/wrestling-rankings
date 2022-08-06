@@ -1,11 +1,16 @@
 .App {
   text-align: center;
+  color: white;
 }
 
 .react-bootstrap-table {
   display: block;
   margin: 0 auto;
   width: 50%;
+}
+
+tbody {
+  color: white;
 }
 
 .caret {
