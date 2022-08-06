@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/wrestling-rankings/static/css/main.fc851496.css",
-    "main.js": "/wrestling-rankings/static/js/main.827bb02a.js",
+    "main.css": "/wrestling-rankings/static/css/main.75be7dcf.css",
+    "main.js": "/wrestling-rankings/static/js/main.a2485434.js",
     "static/js/787.e6552e1a.chunk.js": "/wrestling-rankings/static/js/787.e6552e1a.chunk.js",
     "index.html": "/wrestling-rankings/index.html",
-    "main.fc851496.css.map": "/wrestling-rankings/static/css/main.fc851496.css.map",
-    "main.827bb02a.js.map": "/wrestling-rankings/static/js/main.827bb02a.js.map",
+    "main.75be7dcf.css.map": "/wrestling-rankings/static/css/main.75be7dcf.css.map",
+    "main.a2485434.js.map": "/wrestling-rankings/static/js/main.a2485434.js.map",
     "787.e6552e1a.chunk.js.map": "/wrestling-rankings/static/js/787.e6552e1a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fc851496.css",
-    "static/js/main.827bb02a.js"
+    "static/css/main.75be7dcf.css",
+    "static/js/main.a2485434.js"
   ]
 }
