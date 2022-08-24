@@ -6,7 +6,7 @@ import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, doc, d
 import DeleteIcon from '@mui/icons-material/Delete';
 import './App.css';
 
-const q = query(collection(db, 'users'), orderBy('updated_date', 'desc'));
+const q = query(collection(db, `users/2022/standings`), orderBy('updated_date', 'desc'));
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -16,6 +16,7 @@ function App() {
     losses: ''
   });
   const [showDelete, setShowDelete] = useState(true);
+  const [year, setYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
@@ -29,7 +30,7 @@ function App() {
 
   const addUser = (e) => {
     e.preventDefault();
-    addDoc(collection(db, 'users'), {
+    addDoc(collection(db, `users/${year}/standings`), {
       name: fields.name,
       wins: parseInt(fields.wins),
       losses: parseInt(fields.losses),
@@ -46,7 +47,7 @@ function App() {
   function showAddUserForm(e) {
     e.preventDefault();
     const userForm = document.getElementsByClassName('add-user')[0];
-    if(userForm.style['display'] === 'none') {
+    if (userForm.style['display'] === 'none') {
       userForm.style['display'] = 'block';
     }
     else {
@@ -54,18 +55,35 @@ function App() {
     }
   };
 
+  // const handleChange = (event) => {
+  //   console.log(event.target.value);
+  //   setYear(event.target.value);
+  //   console.log(q);
+  // };
+
   return (
     <div className="App">
+      {/* <InputLabel id="year-select-label">Year</InputLabel>
+      <Select
+        labelId="year-select-label"
+        id="year-select"
+        value={year}
+        label="Year"
+        onChange={handleChange}
+      >
+        <MenuItem value={2021}>2021</MenuItem>
+        <MenuItem value={2022}>2022</MenuItem>
+      </Select> */}
       <h2>Wrestling Rankings</h2>
       <br />
       <RankingsTable
-        headers={[{ dateField: 'name', text: 'Name' }, 'Wins', 'Losses', 'Total Matches', 'Win Rate']}
-        data={users.map(user => ({ ...user, name: user.item.name, wins: user.item.wins, losses: user.item.losses, total: user.item.wins + user.item.losses, win_rate: (user.item.wins + user.item.losses) === 0 ? 0 : (user.item.wins / (user.item.wins + user.item.losses) * 100).toFixed(2), delete: <DeleteIcon fontSize="small" style={{ opacity: 0.7 }} onClick={() => { deleteDoc(doc(db, 'users', user.id)) }} /> }))}
+        year={year}
+        data={users.map(user => ({ ...user, name: user.item.name, wins: user.item.wins, losses: user.item.losses, total: user.item.wins + user.item.losses, win_rate: (user.item.wins + user.item.losses) === 0 ? 0 : (user.item.wins / (user.item.wins + user.item.losses) * 100).toFixed(2), delete: <DeleteIcon fontSize="small" style={{ opacity: 0.7 }} onClick={() => { deleteDoc(doc(db, 'users/2022/standings', user.id)) }} /> }))}
         showDelete={showDelete}
       />
       <Button color="secondary" variant="contained" onClick={showAddUserForm}>Add User</Button>
       <Button color="warning" variant="contained" onClick={() => setShowDelete(!showDelete)}>{showDelete ? 'Show' : 'Hide'} Delete</Button>
-      <div className="add-user" style={{display: 'none'}}>
+      <div className="add-user" style={{ display: 'none' }}>
         <form>
           <TextField id="outlined-basic1" label="Name" name="name" variant="outlined" style={{ margin: "0px 5px" }} size="small" value={fields.name}
             onChange={e => setInput({ ...fields, [e.target.name]: e.target.value })} />
