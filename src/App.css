@@ -37,3 +37,17 @@ tbody {
   border-bottom: 4px solid \9;
   content: "";
 }
+
+#header-toolbar {
+  display: flex;
+  height: 2.5rem;
+  justify-content: space-between;
+}
+
+#admin-tools {
+  display: flex;
+}
+
+#year-select {
+  display: flex;
+}
