@@ -108,9 +108,9 @@ function App() {
             label="Year"
             onChange={selectYear}
           >
-            <MenuItem value={2021}><Link style={{ 'textDecoration': 'none' }} to='/wrestling-rankings/year/2021'>2021</Link></MenuItem>
-            <MenuItem value={2022}><Link style={{ 'textDecoration': 'none' }} to='/wrestling-rankings/year/2022'>2022</Link></MenuItem>
-            <MenuItem value={2023}><Link style={{ 'textDecoration': 'none' }} to='/wrestling-rankings/year/2023'>2023</Link></MenuItem>
+            <MenuItem value={2021}><Link style={{ 'textDecoration': 'none' }} to='/year/2021'>2021</Link></MenuItem>
+            <MenuItem value={2022}><Link style={{ 'textDecoration': 'none' }} to='/year/2022'>2022</Link></MenuItem>
+            <MenuItem value={2023}><Link style={{ 'textDecoration': 'none' }} to='/year/2023'>2023</Link></MenuItem>
           </Select>
         </FormControl>
         <div id="admin-tools" style={{ display: isAdmin && year === currYear ? "block" : "none" }}>
@@ -146,7 +146,7 @@ function App() {
       <br />
       <Routes>
         <Route
-          path='wrestling-rankings/year/:year'
+          path='year/:year'
           element={
             <PageContent
               isEditable={year === currYear && isAdmin}
@@ -158,7 +158,7 @@ function App() {
           path='*'
           element={
             <Navigate
-              to={`/wrestling-rankings/year/${currYear}`}
+              to={`/year/${currYear}`}
               replace />
           }
         />
