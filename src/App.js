@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, InputLabel, Select, MenuItem } from '@mui/material';
 import { db } from './firebase.js';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl } from '@mui/material'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import './App.css';
@@ -48,18 +48,20 @@ function App() {
 
   const addUser = (e) => {
     e.preventDefault();
-    addDoc(collection(db, `users/${year}/standings`), {
+
+    setDoc(doc(db, `users/${year}/standings/`, fields.name.toLowerCase()), {
       name: fields.name,
       wins: parseInt(fields.wins),
       losses: parseInt(fields.losses),
-      updated_date: serverTimestamp(),
-      isAdmin: isAdmin
-    });
+      updated_date: serverTimestamp()
+    })
+
     setInput({
       name: '',
       wins: 0,
       losses: 0
     });
+
     setShowAddUser(!showAddUser);
   };
 
@@ -94,6 +96,10 @@ function App() {
 
   const keyPress = (e) => {
     e.keyCode === 13 && checkPassword();
+  };
+
+  const updateYearFromUrl = (newYear) => {
+    setYear(newYear);
   };
 
   return (
@@ -151,6 +157,7 @@ function App() {
             <PageContent
               isEditable={year === currYear && isAdmin}
               showDelete={showDelete}
+              updateYearFromUrl={updateYearFromUrl}
             />
           }
         />

@@ -4,13 +4,17 @@ import { collection, query, orderBy, onSnapshot, deleteDoc } from 'firebase/fire
 import { useState, useEffect } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RankingsTable from './RankingsTable.js';
+import TitleTable from './TitleTable.js';
 import { useParams } from 'react-router-dom';
 
 const PageContent = (props) => {
-
     const {year} = useParams();
     const q = query(collection(db, `users/${year}/standings`), orderBy('updated_date', 'desc'));
     const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        props.updateYearFromUrl(parseInt(year));
+    }, [year])
 
     useEffect(() => {
         onSnapshot(q, (snapshot) => {
@@ -30,22 +34,22 @@ const PageContent = (props) => {
                 showDelete={props.showDelete}
                 isEditable={props.isEditable}
             />
-            {/* <TitleTable
+            <TitleTable
                 name='AEW Championship'
-                data={titleData['aew-championship']}
+                data='aew-championship'
             />
             <TitleTable 
                 name='Bullet Club Belt'
-                data={titleData['bullet-club-belt']}
+                data='bullet-club-belt'
             />
             <TitleTable 
                 name='NXT Championship'
-                data={titleData['nxt-championship']}
+                data='nxt-championship'
             />
             <TitleTable 
                 name='Money in the Bank'
-                data={titleData['money-in-the-bank']}
-            /> */}
+                data='money-in-the-bank'
+            />
         </div>
 
     )
