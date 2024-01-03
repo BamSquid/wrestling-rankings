@@ -102,6 +102,11 @@ function App() {
     setYear(newYear);
   };
 
+  let menuItems = [];
+  for (let i = 2021; i <= currYear; i++) {
+    menuItems.push(<MenuItem value={i}><Link style={{ 'textDecoration': 'none' }} to={`/year/${i}`}>{i}</Link></MenuItem>)
+  }
+
   return (
     <div className="App">
       <div id="header-toolbar">
@@ -114,9 +119,7 @@ function App() {
             label="Year"
             onChange={selectYear}
           >
-            <MenuItem value={2021}><Link style={{ 'textDecoration': 'none' }} to='/year/2021'>2021</Link></MenuItem>
-            <MenuItem value={2022}><Link style={{ 'textDecoration': 'none' }} to='/year/2022'>2022</Link></MenuItem>
-            <MenuItem value={2023}><Link style={{ 'textDecoration': 'none' }} to='/year/2023'>2023</Link></MenuItem>
+            {menuItems}
           </Select>
         </FormControl>
         <div id="admin-tools" style={{ display: isAdmin && year === currYear ? "block" : "none" }}>

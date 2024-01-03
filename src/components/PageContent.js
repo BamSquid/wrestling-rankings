@@ -34,7 +34,7 @@ const PageContent = (props) => {
                 showDelete={props.showDelete}
                 isEditable={props.isEditable}
             />
-            <TitleTable
+            {/* <TitleTable
                 name='AEW Championship'
                 data='aew-championship'
             />
@@ -49,7 +49,7 @@ const PageContent = (props) => {
             <TitleTable 
                 name='Money in the Bank'
                 data='money-in-the-bank'
-            />
+            /> */}
         </div>
 
     )
